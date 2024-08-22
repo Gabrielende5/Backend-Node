@@ -4,6 +4,9 @@ import {fileURLToPath} from "url";
 import {dirname} from "path";
 import path from "path";
 import testRouter from "./routes/TestRoute.js";
+import { connectDatabase } from "./config/database.js";
+import { config } from "dotenv";
+config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -23,3 +26,5 @@ app.use(express.static(path.join(__dirname, "public"))); // Diz que o "/" é a p
 app.listen(port, () =>{
     console.log(`Servidor rodando na porta ${port}`);
 })
+
+connectDatabase();
