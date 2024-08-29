@@ -26,7 +26,7 @@ export default class ProductController {
         product.name = name;
         product.quantity = quantity;
         product.description = description;
-        await Product.updateOne(product);
+        await Product.updateOne({ _id }, {name, quantity, description});
         const updatedProduct = await Product.findById(_id); // Procura o produto de novo e mostra ele editado agora
         return res.json ({message: "Atualizado com sucesso", data: updatedProduct});
     }

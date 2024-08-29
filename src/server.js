@@ -4,6 +4,7 @@ import {fileURLToPath} from "url";
 import {dirname} from "path";
 import path from "path";
 import testRouter from "./routes/TestRoute.js";
+import productrouter from "./routes/ProductRouter.js";
 import { connectDatabase } from "./config/database.js";
 import { config } from "dotenv";
 config();
@@ -20,6 +21,7 @@ app.use(express.json());
 
 // Coloca a rota em uso
 app.use("/exemplo", testRouter);
+app.use("/products", productrouter);
 
 app.use(express.static(path.join(__dirname, "public"))); // Diz que o "/" é a pagina inicial + falando que é public, ou seja, o server.js pode acessar tudo dentro desta pasta
  
