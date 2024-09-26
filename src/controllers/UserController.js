@@ -1,4 +1,4 @@
-import { User } from "../models/userShema";
+import { User } from "../models/userShema.js";
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
 
@@ -20,9 +20,47 @@ export default class UserController{
             })
             return res.status(200).json({token});
 
-        } catch(error){
+        } catch(error){ // Quando cai o servidor:
             console.error("Error ao fazer login:",error);
             return res.status(500).json({message:"Internal server error"});
         }
     }
+    static async RegisterUser(req,res){
+        const {name, idade, email, password, confirmPassword} = req.body;
+        if (confirmPassword !== password){ // "!==" pois está verificando se é diferente no valor e no tipo (string, float), se fosse "!=" verificaria apenas no valor, isso é usado em todo o JavaScript
+            return res.status(400).json({message:"As senhas são diferentes"});
+
+        } 
+        try {
+            const hashedPassword = await bcrypt.hash(password, 10);
+
+            const newUser = new User({name, idade, email, password: hashedPassword});
+            
+            const createdUser = await newUser.save();
+            return res.status(200).json({
+                message:"User created successfully",
+                data:createdUser,
+            });
+        } catch (error){
+            console.error("Error ao criar usuário:",error);
+            return res.status(500).json({message:"Internal server error"});
+        };
+    }
+    static async authenticateToken(req, res, next){
+        const authHeader = req.headers['authorization'];
+        if (authHeader == null){
+            return res
+                .status(401)
+                .json({message:"Unauthorized"});
+        }
+        jwt.verify(authHeader, process.env.JWT_SECRET, (err, user)=>{ // verifica se a pessoa está logada (tem um token)
+            if(err){
+                return res.status(403).json({message:"Token invalido"});
+
+            }
+            req.user = user;
+            next();
+        });
+    }
+    
 }
