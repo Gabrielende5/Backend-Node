@@ -1,4 +1,4 @@
-import { User } from "../models/user.js";
+import { User } from "../models/userShema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 export default class UserController {
