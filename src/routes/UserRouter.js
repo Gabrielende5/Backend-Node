@@ -1,8 +1,12 @@
-import { Router } from "express";
-import UserController from "../controllers/UserController.js";
+import express from 'express';
+import UserController from '../controllers/UserController';
 
-const userRouter = Router();
-userRouter.post('/register', UserController.RegisterUser);
-userRouter.put('/login', UserController.loginUser);
+const router = express.Router();
 
-export default userRouter;
+router.post('/login', UserController.loginUser);
+router.post('/register', UserController.RegisterUser);
+router.get('/protected-route', UserController.authenticateToken, (req, res) => {
+    res.json({ message: "Você acessou uma rota protegida!" });
+});
+
+export default router;
