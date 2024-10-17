@@ -4,7 +4,7 @@ import express from "express";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import cors from "cors"
-import arquivoTesteController from "./controllers/arquivoTesteController.js";
+import testRouter from "./routes/TestRoute.js";
 import { connectDatabase } from "./config/database.js";
 import productRouter from "./routes/productRouter.js";
 import userRouter from "./routes/userRouter.js";
@@ -31,7 +31,7 @@ const port = process.env.PORT || 4444;
 app.use(express.static(join(__dirname, "public"))); // Diz que o "/" é a pagina inicial + falando que é public, ou seja, o server.js pode acessar tudo dentro desta pasta
 
 // Coloca a rota em uso
-app.use("/exemplo", arquivoTesteController.initial);
+app.use("/exemplo", testRouter);
 app.use("/products", productRouter)
 app.use("/auth",userRouter)
 
