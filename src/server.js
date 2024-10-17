@@ -6,7 +6,7 @@ import { dirname, join } from "path";
 import cors from "cors"
 import testRouter from "./routes/TestRoute.js";
 import { connectDatabase } from "./config/database.js";
-import productRouter from "./routes/productRouter.js";
+import productrouter from "./routes/ProductRouter.js"
 import userRouter from "./routes/userRouter.js";
 config();
 
@@ -32,7 +32,7 @@ app.use(express.static(join(__dirname, "public"))); // Diz que o "/" é a pagina
 
 // Coloca a rota em uso
 app.use("/exemplo", testRouter);
-app.use("/products", productRouter)
+app.use("/products", productrouter)
 app.use("/auth",userRouter)
 
 
