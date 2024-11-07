@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import pkg from "pg";
+const {Pool} = pkg;
 
 export const connectDatabase = () => {
     const dbUrl = process.env.dbUrl;
@@ -15,3 +17,11 @@ export const connectDatabase = () => {
     //     console.log("Tchau")
     // })
 }
+
+export const pool = new Pool({
+    user: "postgres",
+    host: "localhost",
+    database: "comida",
+    password: "1290",
+    port: 5432,
+});

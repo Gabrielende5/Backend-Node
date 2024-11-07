@@ -7,7 +7,8 @@ import cors from "cors"
 import testRouter from "./routes/TestRoute.js";
 import { connectDatabase } from "./config/database.js";
 import productrouter from "./routes/ProductRouter.js"
-import router from "./routes/userRouter.js";
+import router from "./routes/UserRouter.js";
+import comidaRouter from "./routes/ComidaRouter.js";
 config();
 
 // Procurando arquivos
@@ -34,6 +35,8 @@ app.use(express.static(join(__dirname, "public"))); // Diz que o "/" é a pagina
 app.use("/exemplo", testRouter);
 app.use("/products", productrouter);
 app.use("/auth",router);
+
+app.use("/comida",comidaRouter);
 
 
 // Função principal para iniciar o servidor
