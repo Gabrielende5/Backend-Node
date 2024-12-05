@@ -9,6 +9,7 @@ import { connectDatabase } from "./config/database.js";
 import productrouter from "./routes/ProductRouter.js"
 import router from "./routes/UserRouter.js";
 import comidaRouter from "./routes/ComidaRouter.js";
+import pokemonRouter from "./routes/PokemonRouter.js";
 config();
 
 // Procurando arquivos
@@ -37,7 +38,7 @@ app.use("/products", productrouter);
 app.use("/auth",router);
 
 app.use("/comida",comidaRouter);
-
+app.use("/pokemons",pokemonRouter);
 
 // Função principal para iniciar o servidor
 app.listen(port, () => {
