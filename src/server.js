@@ -59,8 +59,8 @@ io.on("connection",(socket) =>{
 
     socket.on("message",(text)=>{
        io.emit("receive_message", {
-            ...text,
-            authorID:socket.id,
+            text,
+            authorId:socket.id,
             author:socket.data.username
         })
     })
@@ -69,6 +69,7 @@ io.on("connection",(socket) =>{
 server.listen(8080, ()=>{
     console.log("Socket.io está rodando na porta 8080");
 })
+
 
 // Coloca a rota em uso
 app.use("/exemplo", testRouter);
