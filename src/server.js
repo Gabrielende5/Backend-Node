@@ -57,9 +57,9 @@ io.on("connection",(socket) =>{
 
     })
 
-    socket.on("message",(text)=>{
+    socket.on("message",(messageData)=>{
        io.emit("receive_message", {
-            text,
+            ...messageData,
             authorId:socket.id,
             author:socket.data.username
         })
